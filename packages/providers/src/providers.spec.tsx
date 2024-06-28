@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { AppProviders, Providers } from './providers';
 
+import '@testing-library/jest-dom';
+
 // Mock provider for testing
 const MockProvider = ({ children }: { children: React.ReactNode }) => (
   <div>{children}</div>
