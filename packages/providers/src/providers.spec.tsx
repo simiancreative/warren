@@ -1,9 +1,11 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { Providers, AppProviders } from './providers';
+
+import { AppProviders, Providers } from './providers';
 
 // Mock provider for testing
-const MockProvider: React.FC = ({ children }) => <div>{children}</div>;
+const MockProvider = ({ children }: { children: React.ReactNode }) => (
+  <div>{children}</div>
+);
 
 describe('NestedProvider', () => {
   it('renders children when no providers are passed', () => {
