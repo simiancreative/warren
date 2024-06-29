@@ -10,7 +10,8 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm publish"]
+        "commands": ["pnpm publish"],
+        "cwd": "packages/providers"
       }
     },
 
