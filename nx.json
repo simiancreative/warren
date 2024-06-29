@@ -83,13 +83,5 @@
         "unitTestRunner": "jest"
       }
     }
-  },
-
-  "release": {
-    "changelog": {
-      "workspaceChangelog": {
-        "createRelease": "github"
-      }
-    }
   }
 }
