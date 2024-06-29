@@ -31,6 +31,6 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm nx release publish
+      - run: pnpm nx affected -t publish --exclude=@warren/source
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

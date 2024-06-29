@@ -1,6 +1,12 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
+    "publish": {
+      "executor": "@nx/nx:run-commands",
+      "options": {
+        "commands": ["pnpm publish"]
+      }
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {
@@ -11,11 +17,6 @@
     "lint": {
       "options": {
         "max-warnings": 0
-      }
-    },
-    "nx-release-publish": {
-      "options": {
-        "registry": "https://npm.pkg.github.com"
       }
     },
     "test": {
@@ -86,14 +87,6 @@
         "style": "tailwind",
         "linter": "eslint",
         "unitTestRunner": "jest"
-      }
-    }
-  },
-
-  "release": {
-    "changelog": {
-      "workspaceChangelog": {
-        "createRelease": "github"
       }
     }
   }
