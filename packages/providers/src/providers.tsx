@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export type AppProviders = Array<[(props: any) => any, object]>;
+type ProviderProps = {
+  [key: string]: unknown;
+  children: ReactNode;
+};
+type Provider = (props: ProviderProps) => ReactNode;
+export type NestedProviders = Array<[Provider, object]>;
 
-interface AppProviderProps {
-  providers: AppProviders;
+interface ProvidersProps {
+  providers: NestedProviders;
   children: React.ReactNode;
 }
 
-function NestedProvider({ providers, children }: AppProviderProps) {
+function NestedProvider({ providers, children }: ProvidersProps) {
   if (providers.length === 0) {
-    return <>{children}</>;
+    return children;
   }
 
   const [Provider, props] = providers[0];
@@ -21,6 +26,6 @@ function NestedProvider({ providers, children }: AppProviderProps) {
   );
 }
 
-export function Providers({ providers, children }: AppProviderProps) {
+export function Providers({ providers, children }: ProvidersProps) {
   return <NestedProvider providers={providers}>{children}</NestedProvider>;
 }

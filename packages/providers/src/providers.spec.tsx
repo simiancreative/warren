@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { AppProviders, Providers } from './providers';
+import { NestedProviders, Providers } from './providers';
 
 import '@testing-library/jest-dom';
 
@@ -21,7 +21,7 @@ describe('NestedProvider', () => {
   });
 
   it('renders providers in the correct order', () => {
-    const providers: AppProviders = [
+    const providers: NestedProviders = [
       [MockProvider, {}],
       [MockProvider, {}],
     ];
@@ -34,8 +34,8 @@ describe('NestedProvider', () => {
 
     // Check that providers are nested correctly
     expect(container.firstChild).toBeInstanceOf(HTMLDivElement);
-    expect(container.firstChild.firstChild).toBeInstanceOf(HTMLDivElement);
-    expect(container.firstChild.firstChild.firstChild).toHaveTextContent(
+    expect(container.firstChild?.firstChild).toBeInstanceOf(HTMLDivElement);
+    expect(container.firstChild?.firstChild?.firstChild).toHaveTextContent(
       'Test',
     );
   });
@@ -53,7 +53,7 @@ describe('Providers', () => {
   });
 
   it('renders providers in the correct order', () => {
-    const providers: AppProviders = [
+    const providers: NestedProviders = [
       [MockProvider, {}],
       [MockProvider, {}],
     ];
@@ -66,8 +66,8 @@ describe('Providers', () => {
 
     // Check that providers are nested correctly
     expect(container.firstChild).toBeInstanceOf(HTMLDivElement);
-    expect(container.firstChild.firstChild).toBeInstanceOf(HTMLDivElement);
-    expect(container.firstChild.firstChild.firstChild).toHaveTextContent(
+    expect(container.firstChild?.firstChild).toBeInstanceOf(HTMLDivElement);
+    expect(container.firstChild?.firstChild?.firstChild).toHaveTextContent(
       'Test',
     );
   });

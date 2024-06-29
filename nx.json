@@ -9,6 +9,11 @@
         "forwardAllArgs": false
       }
     },
+    "lint": {
+      "options": {
+        "max-warnings": 0
+      }
+    },
     "nx-release-publish": {
       "options": {
         "registry": "https://registry.github.com"

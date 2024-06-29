@@ -13,6 +13,7 @@
     "simple-import-sort"
   ],
   "extends": [
+    "eslint:recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
     "plugin:jsx-a11y/recommended",
@@ -46,8 +47,7 @@
         "args": "after-used",
         "argsIgnorePattern": "^_"
       }
-    ],
-    "@typescript-eslint/no-explicit-any": "error"
+    ]
   },
   "overrides": [
     {
