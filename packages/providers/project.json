@@ -1,0 +1,19 @@
+{
+  "name": "providers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/providers/src",
+  "projectType": "library",
+  "tags": [],
+
+  "// targets": "to see all targets run: nx show project providers --web",
+  "targets": {
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["tsc -p tsconfig.lib.json --noEmit"],
+        "cwd": "packages/providers",
+        "forwardAllArgs": false
+      }
+    }
+  }
+}
