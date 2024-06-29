@@ -1,7 +1,19 @@
-name: Publish package to GitHub Packages
+name: publish
+
 on:
   release:
     types: [published]
+
+permissions:
+  deployments: read
+  id-token: write
+  contents: read
+  actions: read
+  pull-requests: write
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
