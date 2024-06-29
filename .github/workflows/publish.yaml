@@ -31,6 +31,6 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm nx publish
+      - run: pnpm nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
