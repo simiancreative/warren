@@ -89,5 +89,12 @@
       }
     }
   },
-  "nxCloudAccessToken": "NX_CLOUD_ACCESS_TOKEN"
+
+  "release": {
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
+  }
 }
