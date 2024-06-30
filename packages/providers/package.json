@@ -1,6 +1,6 @@
 {
-  "name": "@warren/providers",
-  "version": "0.0.10",
+  "name": "@simian-creative/providers",
+  "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
   "repository": {

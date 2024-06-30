@@ -2,6 +2,43 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
 
   "targetDefaults": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "inputs": ["production", "^production"],
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "{projectRoot}/dist"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      },
+
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/src/**/*.{ts,tsx,js,jsx}"],
+        "max-warnings": 0
+      },
+
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ],
+      "cache": true
+    },
+
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {
@@ -10,37 +47,38 @@
       }
     },
 
-    "publish": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["pnpm publish"]
-      }
-    },
-
-    "release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["pnpm version"]
-      }
-    },
-
-    "lint": {
-      "options": {
-        "max-warnings": 0
-      }
-    },
-
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true,
+      "executor": "@nx/jest:jest",
+      "outputs": ["{options.outputPath}"],
       "options": {
+        "outputPath": "coverage/{projectName}",
+        "jestConfig": "{projectRoot}/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
         "ci": {
           "ci": true,
-          "codeCoverage": true
+          "codeCoverage": true,
+          "coverageDirectory": "coverage/{projectName}",
+          "coverageReporters": ["json", "html", "text"]
         }
+      },
+
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true
+    },
+
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["../../bin/version.sh"]
+      }
+    },
+
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm publish"]
       }
     }
   },
@@ -59,31 +97,6 @@
     ],
     "sharedGlobals": []
   },
-
-  "plugins": [
-    {
-      "plugin": "@nx/vite/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "testTargetName": "test",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview",
-        "serveStaticTargetName": "serve-static"
-      }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      }
-    }
-  ],
 
   "generators": {
     "@nx/react": {

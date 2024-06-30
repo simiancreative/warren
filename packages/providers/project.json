@@ -7,6 +7,12 @@
 
   "// targets": "to see all targets run: nx show project providers --web",
   "targets": {
+    "build": {
+      "options": {
+        "cwd": "packages/providers"
+      }
+    },
+
     "release": {
       "options": {
         "cwd": "packages/providers"
@@ -19,7 +25,19 @@
       }
     },
 
+    "lint": {
+      "options": {
+        "cwd": "packages/providers"
+      }
+    },
+
     "typecheck": {
+      "options": {
+        "cwd": "packages/providers"
+      }
+    },
+
+    "test": {
       "options": {
         "cwd": "packages/providers"
       }

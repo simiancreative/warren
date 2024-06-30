@@ -1,0 +1,40 @@
+name: set-shas
+description: 'Setup base and head SHAs for affected apps'
+
+inputs:
+  env_name:
+    description: 'The name of the environment'
+  gh_token:
+    description: 'The GitHub token'
+  gh_sha:
+    description: 'The GitHub SHA'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get last deployment
+      id: get-deployment
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.gh_token }}
+      run: |
+        ENV_NAME=${{inputs.env_name}}
+
+        last_version=$(
+          gh api \
+          repos/simiancreative/warren/releases/latest \
+          --jq '.tag_name'
+        )
+
+        deployment_hash=$(
+          gh api \
+          repos/simiancreative/warren/git/ref/tags/${last_version} \
+          --jq '.object.sha'
+        )
+
+        if [[ $deployment_hash ]]; then
+          LAST_DEPLOYMENT=${deployment_hash}
+        fi
+
+        echo "NX_BASE=${LAST_DEPLOYMENT-${ENV_NAME}}" >> $GITHUB_ENV
+        echo "NX_HEAD=${{inputs.gh_sha}}" >> $GITHUB_ENV

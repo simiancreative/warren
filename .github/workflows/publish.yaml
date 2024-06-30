@@ -29,8 +29,34 @@ jobs:
 
       - run: pnpm i
 
-      - uses: nrwl/nx-set-shas@v4
+      - uses: ./.github/actions/set-shas
+        with:
+          env_name: main
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_sha: ${{ github.sha }}
 
-      - run: pnpm nx affected -t publish --exclude=@warren/source
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # build the packages
+      - run: |
+          pnpm nx affected -t build \
+          --nxBail \
+          --exclude=@warren/source
+
+      # update the version on the main package
+      - run: ./bin/version-source.sh ${{ github.event.release.tag_name }}
+
+      # update the version in the package.json of each package
+      - run: |
+          pnpm nx affected -t version \
+          --nxBail \
+          --exclude=@warren/source
+
+      # commit the changes
+      - run: |
+          git commit -am "chore(release): publish ${{ github.event.release.tag_name }}"
+          git push
+
+      # publish the packages
+      - run: |
+          pnpm nx affected -t publish \
+          --nxBail \
+          --exclude=@warren/source

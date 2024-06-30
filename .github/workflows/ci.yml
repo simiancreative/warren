@@ -2,6 +2,8 @@ name: ci
 
 on:
   pull_request:
+    branches:
+      - main
 
 permissions:
   actions: read
@@ -22,6 +24,10 @@ jobs:
 
       - run: pnpm i
 
-      - uses: nrwl/nx-set-shas@v4
+      - uses: ./.github/actions/set-shas
+        with:
+          env_name: main
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_sha: ${{ github.sha }}
 
       - run: pnpm nx affected -t lint typecheck test

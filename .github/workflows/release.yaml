@@ -1,9 +1,9 @@
-name: release
+name: Prepare Release
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types:
+      - closed
     paths-ignore:
       - CHANGELOG.md
       - README.md
@@ -22,6 +22,7 @@ env:
 
 jobs:
   main:
+    if: github.event.pull_request.merged == true
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -33,14 +34,16 @@ jobs:
 
       - run: pnpm i
 
-      - uses: nrwl/nx-set-shas@v4
+      - uses: ./.github/actions/set-shas
+        with:
+          env_name: main
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_sha: ${{ github.sha }}
 
-      - run: |
-          pnpm nx affected -t lint typecheck test \
-          --nxBail \
-          --exclude=@warren/source
+      # test the packages
+      - run: pnpm nx affected -t lint typecheck test build
 
-          pnpm nx affected -t build version  \
-          --parallel=0 \
-          --nxBail \
-          --exclude=@warren/source
+      # create a release
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
