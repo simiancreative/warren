@@ -1,9 +1,9 @@
 name: Prepare Release
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - main
     paths-ignore:
       - CHANGELOG.md
       - README.md
