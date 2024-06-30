@@ -22,7 +22,6 @@ env:
 
 jobs:
   main:
-    if: github.event.pull_request.merged == true
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
