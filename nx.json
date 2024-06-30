@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+
   "targetDefaults": {
     "typecheck": {
       "executor": "nx:run-commands",
@@ -8,11 +9,27 @@
         "forwardAllArgs": false
       }
     },
+
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm publish"]
+      }
+    },
+
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm version"]
+      }
+    },
+
     "lint": {
       "options": {
         "max-warnings": 0
       }
     },
+
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
@@ -42,6 +59,7 @@
     ],
     "sharedGlobals": []
   },
+
   "plugins": [
     {
       "plugin": "@nx/vite/plugin",
@@ -66,6 +84,7 @@
       }
     }
   ],
+
   "generators": {
     "@nx/react": {
       "application": {

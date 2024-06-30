@@ -7,20 +7,21 @@
 
   "// targets": "to see all targets run: nx show project providers --web",
   "targets": {
-    "publish": {
-      "executor": "nx:run-commands",
+    "release": {
       "options": {
-        "commands": ["pnpm publish"],
+        "cwd": "packages/providers"
+      }
+    },
+
+    "publish": {
+      "options": {
         "cwd": "packages/providers"
       }
     },
 
     "typecheck": {
-      "executor": "nx:run-commands",
       "options": {
-        "commands": ["tsc -p tsconfig.lib.json --noEmit"],
-        "cwd": "packages/providers",
-        "forwardAllArgs": false
+        "cwd": "packages/providers"
       }
     }
   }

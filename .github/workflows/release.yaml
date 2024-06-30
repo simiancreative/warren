@@ -35,6 +35,12 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm nx affected -t lint typecheck test
+      - run: |
+          pnpm nx affected -t lint typecheck test \
+          --nxBail \
+          --exclude=@warren/source
 
-      - run: pnpm nx release --skip-publish
+          pnpm nx affected -t build version  \
+          --parallel=0 \
+          --nxBail \
+          --exclude=@warren/source
