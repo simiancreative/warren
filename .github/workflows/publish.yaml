@@ -31,12 +31,6 @@ jobs:
 
       - run: pnpm i
 
-      - uses: ./.github/actions/set-shas
-        with:
-          env_name: main
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          gh_sha: ${{ github.sha }}
-
       # build the packages
       - run: |
           pnpm nx run-many --all -t build \
