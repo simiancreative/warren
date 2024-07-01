@@ -20,16 +20,10 @@ runs:
       run: |
         ENV_NAME=${{inputs.env_name}}
 
-        last_version=$(
-          gh api \
-          repos/simiancreative/warren/releases/latest \
-          --jq '.tag_name'
-        )
-
         deployment_hash=$(
           gh api \
-          repos/simiancreative/warren/git/ref/tags/${last_version} \
-          --jq '.object.sha'
+          repos/reguardprotection/cortex/deployments?environment=${ENV_NAME} \
+          --jq '.[0].sha'
         )
 
         if [[ $deployment_hash ]]; then
