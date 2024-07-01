@@ -22,7 +22,7 @@ runs:
 
         deployment_hash=$(
           gh api \
-          "repos/reguardprotection/cortex/deployments?environment=${ENV_NAME}" \
+          "repos/simiancreative/warren/deployments?environment=${ENV_NAME}" \
           --jq '.[0].sha'
         )
 
