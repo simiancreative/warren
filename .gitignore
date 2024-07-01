@@ -4,6 +4,7 @@
 dist
 tmp
 /out-tsc
+version.txt
 
 # dependencies
 node_modules

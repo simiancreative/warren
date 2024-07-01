@@ -1,19 +1,21 @@
 {
   "name": "@simian-creative/providers",
   "version": "0.0.1",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "includes": [
-    "dist"
-  ],
+  "publishConfig": {
+    "scope": "@simian-creative",
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/simiancreative/warren.git"
   },
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./index.mjs",
+      "require": "./index.js"
     }
   }
 }

@@ -42,18 +42,8 @@ jobs:
           --nxBail \
           --exclude=@warren/source
 
-      # update the version on the main package
-      - run: ./bin/version-source.sh ${{ github.event.release.tag_name }}
-
-      # update the version in the package.json of each package
-      - run: |
-          pnpm nx affected -t version \
-          --nxBail \
-          --exclude=@warren/source
-
-      # add .npmrc
-      - run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
+      # write the version to a file
+      - run: echo ${{ github.event.release.tag_name }} > version.txt
 
       # publish the packages
       - run: |

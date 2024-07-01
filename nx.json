@@ -68,17 +68,10 @@
       "cache": true
     },
 
-    "release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["../../bin/version.sh"]
-      }
-    },
-
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm publish"]
+        "commands": ["../../../bin/prep-publish.sh", "pnpm publish"]
       }
     }
   },
