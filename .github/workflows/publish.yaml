@@ -51,12 +51,6 @@ jobs:
           --nxBail \
           --exclude=@warren/source
 
-      # commit the changes
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore(release): ${{ github.event.release.tag_name }}'
-          branch: main
-
       # add .npmrc
       - run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > .npmrc
