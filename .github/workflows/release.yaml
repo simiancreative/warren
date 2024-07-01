@@ -38,5 +38,7 @@ jobs:
 
       # create a release
       - uses: release-drafter/release-drafter@v5
+        with:
+          commitish: ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
