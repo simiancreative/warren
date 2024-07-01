@@ -1,3 +1,5 @@
+#!/bin/bash
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 SOURCE_PATH=${SCRIPT_DIR}/../version.txt
 
