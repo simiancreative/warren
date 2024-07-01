@@ -1,16 +1,19 @@
 {
   "name": "@simian-creative/providers",
   "version": "0.0.1",
-  "main": "./index.js",
-  "types": "./index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "includes": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/simiancreative/warren.git"
   },
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   }
 }
