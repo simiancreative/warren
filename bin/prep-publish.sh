@@ -13,3 +13,4 @@ jq ".version = \"$NEW_VERSION\"" package.json >tmp.$$.json \
 echo '//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > .npmrc
 echo 'registry=https://registry.npmjs.org/' >> .npmrc
 echo 'always-auth=true' >> .npmrc
+echo 'git-checks=false' >> .npmrc
