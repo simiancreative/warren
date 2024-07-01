@@ -1,3 +1,4 @@
+import { createContext } from 'react';
 import { render } from '@testing-library/react';
 
 import { NestedProviders, Providers } from './providers';
@@ -5,9 +6,19 @@ import { NestedProviders, Providers } from './providers';
 import '@testing-library/jest-dom';
 
 // Mock provider for testing
-const MockProvider = ({ children }: { children: React.ReactNode }) => (
-  <div>{children}</div>
-);
+interface ThemeProviderProps {
+  theme: Record<string, unknown>;
+  children: React.ReactNode;
+}
+
+const NavContext = createContext({ name: 'John Doe' });
+const NavProvider = NavContext.Provider;
+
+const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
+  // Implementation of ThemeProvider
+  console.log('ThemeProvider', theme);
+  return <div>{children}</div>;
+};
 
 describe('NestedProvider', () => {
   it('renders children when no providers are passed', () => {
@@ -22,8 +33,8 @@ describe('NestedProvider', () => {
 
   it('renders providers in the correct order', () => {
     const providers: NestedProviders = [
-      [MockProvider, {}],
-      [MockProvider, {}],
+      [NavProvider, { value: { name: 'John Doe' } }],
+      [ThemeProvider, { theme: { primary: 'blue' } }],
     ];
 
     const { container } = render(
@@ -54,8 +65,8 @@ describe('Providers', () => {
 
   it('renders providers in the correct order', () => {
     const providers: NestedProviders = [
-      [MockProvider, {}],
-      [MockProvider, {}],
+      [NavProvider, { value: { name: 'John Doe' } }],
+      [ThemeProvider, { theme: { primary: 'blue' } }],
     ];
 
     const { container } = render(

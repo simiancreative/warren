@@ -1,11 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-type ProviderProps = {
-  [key: string]: unknown;
-  children: ReactNode;
-};
-type Provider = (props: ProviderProps) => ReactNode;
-export type NestedProviders = Array<[Provider, object]>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NestedProviders = Array<[React.ComponentType<any>, object]>;
 
 interface ProvidersProps {
   providers: NestedProviders;
