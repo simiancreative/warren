@@ -40,7 +40,7 @@ jobs:
           gh_sha: ${{ github.sha }}
 
       # test the packages
-      - run: pnpm nx affected -t lint typecheck test build
+      - run: pnpm nx run-many --all -t lint typecheck test build
 
       # create a release
       - uses: release-drafter/release-drafter@v5

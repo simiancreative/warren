@@ -39,7 +39,7 @@ jobs:
 
       # build the packages
       - run: |
-          pnpm nx affected -t build \
+          pnpm nx run-many --all -t build \
           --nxBail \
           --exclude=@warren/source
 
@@ -48,6 +48,6 @@ jobs:
 
       # publish the packages
       - run: |
-          pnpm nx affected -t publish \
+          pnpm nx run-many --all -t publish \
           --nxBail \
           --exclude=@warren/source
