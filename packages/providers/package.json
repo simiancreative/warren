@@ -6,16 +6,21 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "main": "./index.js",
-  "types": "./index.d.ts",
+  "main": "./providers.js",
+  "types": "./providers.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/simiancreative/warren.git"
   },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "types": "./providers.d.ts",
+      "import": "./providers.mjs",
+      "require": "./providers.js"
     }
   }
 }
